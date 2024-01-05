@@ -1,0 +1,102 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+body {
+  background: #000;
+  color: #fff;
+}
+
+main {
+  width: 1000px;
+  border: 2px solid red;
+  padding: 1rem;
+}
+
+.video-stats-section {
+  background-color: red;
+}
+
+#video-stats {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+
+  & div:nth-of-type(1) {
+    flex-grow: 1;
+  }
+
+  & div:nth-of-type(2) {
+    display: flex;
+    gap: 2rem;
+
+    & p {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+  }
+}
+
+.channel-stats-section {
+  margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  border: 2px solid aqua;
+
+  & img {
+    align-self: flex-start;
+    width: 60px;
+    border-radius: 50%;
+    margin-top: 0.5rem;
+  }
+}
+
+#channel-stats-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#comments-container {
+  border: 2px solid red;
+}
+
+#comments-header {
+  border: 2px solid yellow;
+  display: flex;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.comment-box {
+  border: 2px solid darkorange;
+  display: flex;
+  gap: 1rem;
+  & img {
+    align-self: flex-start;
+    width: 50px;
+    border-radius: 50%;
+    margin-top: 0.5rem;
+  }
+}
+
+#comment-likes-section {
+  display: flex;
+  gap: 1rem;
+
+  & p {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+  }
+}
+
+#subscribe-btn {
+  background: red;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 2px;
+  margin-right: 1rem;
+}
