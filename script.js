@@ -12,7 +12,7 @@ let searchIcon = document.querySelector("#search-icon");
 console.log(localStorage.getItem("searchterm"));
 
 if (localStorage.getItem("searchterm") !== null) {
-  fetchVideos(localStorage.getItem("searchterm"), 6);
+  fetchVideos(localStorage.getItem("searchterm"), 20);
 }
 // if(localStorage.getItem('searchterm'))
 
@@ -26,11 +26,10 @@ searchIcon.addEventListener("click", () => {
   if (container.children.length > 0) {
     Array.from(container.children).forEach((el) => el.remove());
   }
-
   console.log("RENDERINGGGGG");
 
   localStorage.setItem("searchterm", searchTerm);
-  fetchVideos(searchTerm, 6);
+  fetchVideos(searchTerm, 20);
 });
 
 for (let i = 0; i < 15; i++) {
