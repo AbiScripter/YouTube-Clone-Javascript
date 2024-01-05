@@ -8,12 +8,10 @@ body {
 
 main {
   width: 1000px;
-  border: 2px solid red;
   padding: 1rem;
 }
 
 .video-stats-section {
-  background-color: red;
 }
 
 #video-stats {
@@ -41,7 +39,6 @@ main {
   margin: 1rem 0;
   display: flex;
   gap: 1rem;
-  border: 2px solid aqua;
 
   & img {
     align-self: flex-start;
@@ -58,18 +55,15 @@ main {
 }
 
 #comments-container {
-  border: 2px solid red;
 }
 
 #comments-header {
-  border: 2px solid yellow;
   display: flex;
   gap: 2rem;
   padding: 1rem 0;
 }
 
 .comment-box {
-  border: 2px solid darkorange;
   display: flex;
   gap: 1rem;
   & img {
