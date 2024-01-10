@@ -1,5 +1,5 @@
-const API_KEY = "AIzaSyBxh6zllBNDvMzIh3m020wdCAMSw1WIEcA"; //1st mail
-// const API_KEY = "AIzaSyAl8P1Mv2kS8FhvE1gGiaySfiZa21UL6qc"; //2nd mail
+// const API_KEY = "AIzaSyBxh6zllBNDvMzIh3m020wdCAMSw1WIEcA"; //1st mail
+const API_KEY = "AIzaSyAl8P1Mv2kS8FhvE1gGiaySfiZa21UL6qc"; //2nd mail
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 
 let container = document.querySelector(".container");
@@ -148,10 +148,16 @@ subscriptions.forEach((li) => {
 });
 
 //!redirecting part
+//!using Event Delegation in practice
 container.addEventListener("click", (e) => {
-  localStorage.setItem("videoId", e.target.id);
-  localStorage.setItem("channelId", e.target.getAttribute("data-channel-id"));
-  redirectToDetails();
+  if (
+    e.target.className === "thumbnail" ||
+    e.target.className === "video-title"
+  ) {
+    localStorage.setItem("videoId", e.target.id);
+    localStorage.setItem("channelId", e.target.getAttribute("data-channel-id"));
+    redirectToDetails();
+  }
 });
 
 //redirect to player page

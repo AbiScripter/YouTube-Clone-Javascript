@@ -1,10 +1,13 @@
-const API_KEY = "AIzaSyBxh6zllBNDvMzIh3m020wdCAMSw1WIEcA";
-// const API_KEY = "AIzaSyAl8P1Mv2kS8FhvE1gGiaySfiZa21UL6qc"; //2nd mail
+// const API_KEY = "AIzaSyBxh6zllBNDvMzIh3m020wdCAMSw1WIEcA";
+const API_KEY = "AIzaSyAl8P1Mv2kS8FhvE1gGiaySfiZa21UL6qc"; //2nd mail
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
-let videoId = localStorage.getItem("videoId");
-let channelId = localStorage.getItem("channelId");
+
 let detailsContainer = document.querySelector("#details-container");
 let commentsContainer = document.querySelector("#comments-container");
+
+let videoId = localStorage.getItem("videoId");
+let channelId = localStorage.getItem("channelId");
+
 console.log(videoId, channelId);
 
 //YT inbuilt class from Youtube API
