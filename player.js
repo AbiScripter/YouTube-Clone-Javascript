@@ -7,6 +7,7 @@ let detailsContainer = document.querySelector("#details-container");
 let commentsContainer = document.querySelector("#comments-container");
 console.log(videoId, channelId);
 
+//YT inbuilt class from Youtube API
 window.addEventListener("load", () => {
   // we need to write logic for rendering video player
   // iframe
@@ -19,9 +20,10 @@ window.addEventListener("load", () => {
   }
 });
 
-//inital render
 getVideoStats(videoId);
+getComments(videoId);
 
+//fetching video details
 async function getVideoStats(videoId) {
   const response = await fetch(
     `${BASE_URL}/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`
@@ -31,8 +33,36 @@ async function getVideoStats(videoId) {
   renderVideoDetails(data.items[0]);
 }
 
+//fetching comments
+async function getComments(videoId) {
+  const response = await fetch(
+    `${BASE_URL}/commentThreads?key=${API_KEY}&videoId=${videoId}&maxResults=25&part=snippet`
+  );
+  const data = await response.json();
+  console.log(data);
+  renderComments(data.items);
+}
+
+//getChannelDetails used in renderVideoDetails function
+async function getChannelDetails(channelId) {
+  const response = await fetch(
+    `${BASE_URL}/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channelId}&key=${API_KEY}`
+  );
+  const data = await response.json();
+  console.log(data);
+  let obj = {
+    channelSubsCount: data.items[0].statistics.subscriberCount,
+    channelThumbnail: data.items[0].snippet.thumbnails.default.url,
+    channelDescription: data.items[0].snippet.description,
+    channelTitle: data.items[0].snippet.title,
+  };
+
+  return obj;
+}
+
+//rendering video details
 async function renderVideoDetails(videoDetails) {
-  let channelDetails = await getChannelLogo(channelId);
+  let channelDetails = await getChannelDetails(channelId);
 
   detailsContainer.insertAdjacentHTML(
     "beforeend",
@@ -63,7 +93,7 @@ async function renderVideoDetails(videoDetails) {
          <div id="channel-stats-top">
             <div>
               <p>${channelDetails.channelTitle}</p>
-              <p>${editViews(channelDetails.channelSubsCount)} subscribers</p>
+              <p>${formatViews(channelDetails.channelSubsCount)} subscribers</p>
             </div>
             <button id="subscribe-btn">SUBSCRIBE</button>
           </div>
@@ -81,32 +111,7 @@ async function renderVideoDetails(videoDetails) {
   );
 }
 
-async function getChannelLogo(channelId) {
-  const response = await fetch(
-    `${BASE_URL}/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channelId}&key=${API_KEY}`
-  );
-  const data = await response.json();
-  console.log(data);
-  let obj = {
-    channelSubsCount: data.items[0].statistics.subscriberCount,
-    channelThumbnail: data.items[0].snippet.thumbnails.default.url,
-    channelDescription: data.items[0].snippet.description,
-    channelTitle: data.items[0].snippet.title,
-  };
-
-  return obj;
-}
-
-async function getComments(videoId) {
-  const response = await fetch(
-    `${BASE_URL}/commentThreads?key=${API_KEY}&videoId=${videoId}&maxResults=25&part=snippet`
-  );
-  const data = await response.json();
-  console.log(data);
-  renderComments(data.items);
-}
-getComments(videoId);
-
+//rendering comments
 function renderComments(commentsData) {
   commentsData.forEach((data) => {
     commentsContainer.insertAdjacentHTML(
@@ -139,18 +144,4 @@ function renderComments(commentsData) {
       `
     );
   });
-}
-
-function editViews(views) {
-  if (views >= 1000000) {
-    return (views / 1000000).toFixed(1) + "M";
-  } else if (views >= 1000) {
-    return (views / 1000).toFixed(1) + "K";
-  } else {
-    return views;
-  }
-}
-
-function editDate(date) {
-  return date.slice(0, 10);
 }
