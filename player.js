@@ -16,8 +16,8 @@ window.addEventListener("load", () => {
   // iframe
   if (YT) {
     new YT.Player("video-container", {
-      height: "500",
-      width: "1000",
+      height: "700",
+      width: "1280",
       videoId,
     });
   }
@@ -147,4 +147,25 @@ function renderComments(commentsData) {
       `
     );
   });
+}
+
+// dummy recommended
+for (let i = 0; i < 10; i++) {
+  const recommendCard = document.createElement("div");
+  recommendCard.className = "recommend-card";
+
+  recommendCard.insertAdjacentHTML(
+    "beforeend",
+    `
+    <img src="profileImages/hq720.webp" class="recommend-thumbnail">
+
+    <div class="recommend-card-details">
+      <p>Learn JavaScript - Full Course for Beginners</p>
+      <p>freeCodeCamp.org</p>
+      <p><span>16M views . 5 years ago</span></p>
+    </div>
+  `
+  );
+
+  document.querySelector("#recommended-container").appendChild(recommendCard);
 }
